@@ -1,4 +1,6 @@
 import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { z } from "zod";
 
 export const usersTable = pgTable("users_table", {
   id: serial("id").primaryKey(),
@@ -7,5 +9,11 @@ export const usersTable = pgTable("users_table", {
   email: text("email").notNull().unique(),
 });
 
-export type SelectUser = typeof usersTable.$inferSelect;
-export type InsertUser = typeof usersTable.$inferInsert;
+// Schema for selecting a user - can be used to validate API responses
+export const selectUserSchema = createSelectSchema(usersTable);
+export type SelectUser = z.infer<typeof selectUserSchema>;
+
+// Schema for inserting a user - can be used to validate API requests
+export const insertUserSchema = createInsertSchema(usersTable, { email: z.string().email(), age: z.coerce.number() });
+
+export type InsertUser = z.infer<typeof insertUserSchema>;

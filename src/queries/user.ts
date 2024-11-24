@@ -1,3 +1,5 @@
+"use server";
+
 import { db } from "$/db";
 import { type InsertUser, type SelectUser, usersTable } from "$/schema/users";
 import { eq } from "drizzle-orm";
