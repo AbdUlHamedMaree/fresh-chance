@@ -1,7 +1,7 @@
 'use server';
 
-import { createUser, deleteUser } from '$/queries/user';
-import { insertUserSchema } from '$/schema/users';
+import { createUser, deleteUser } from '@/queries/user';
+import { insertUserSchema } from '@/schema/users';
 
 export const createUserAction = async (formData: FormData) =>
   createUser(insertUserSchema.parse(Object.fromEntries(formData)));
