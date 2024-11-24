@@ -1,15 +1,15 @@
-import { CreateUserForm } from "$/components/smart/CreateUserForm";
-import { Button } from "$/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "$/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "$/components/ui/table";
-import { getAllUsers } from "$/queries/user";
-import { removeUserAction } from "./actions";
+import { CreateUserForm } from '$/components/smart/CreateUserForm';
+import { Button } from '$/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '$/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '$/components/ui/table';
+import { getAllUsers } from '$/queries/user';
+import { removeUserAction } from './actions';
 
 export default async function Home() {
   const users = await getAllUsers();
 
   return (
-    <div className="min-h-screen p-8 max-w-6xl mx-auto space-y-8">
+    <div className='min-h-screen p-8 max-w-6xl mx-auto space-y-8'>
       <Card>
         <CardHeader>
           <CardTitle>Create New User</CardTitle>
@@ -34,15 +34,15 @@ export default async function Home() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {users.map((user) => (
+              {users.map(user => (
                 <TableRow key={user.id}>
                   <TableCell>{user.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.age}</TableCell>
                   <TableCell>
-                    <form action={removeUserAction} method="POST">
-                      <input type="hidden" name="id" value={user.id} />
-                      <Button variant="destructive" size="sm">
+                    <form action={removeUserAction} method='POST'>
+                      <input type='hidden' name='id' value={user.id} />
+                      <Button variant='destructive' size='sm'>
                         Delete
                       </Button>
                     </form>
