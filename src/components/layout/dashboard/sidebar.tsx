@@ -14,8 +14,8 @@ const sidebarNavItems = [
     icon: HomeIcon,
   },
   {
-    title: 'Users',
-    href: '/dashboard/users',
+    title: 'Products',
+    href: '/dashboard/products',
     icon: UserIcon,
   },
 ];

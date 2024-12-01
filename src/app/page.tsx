@@ -1,10 +1,15 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AppleIcon, Leaf, Package, ShoppingCart, Smartphone, ThumbsUp } from 'lucide-react';
+import { getAllProductsAction } from './dashboard/products/actions';
+import { ProductCard } from '@/components/dumb/product-card';
 
-export default function Home() {
+export const dynamic = 'force-dynamic';
+
+export default async function Home() {
+  const products = await getAllProductsAction();
+
   return (
     <>
       <section className='py-12 md:py-24 lg:py-32 xl:py-48'>
@@ -73,25 +78,16 @@ export default function Home() {
             Featured Products
           </h2>
           <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
-            {[
-              { name: 'Fresh Apples', price: '$1.99', image: '/placeholder.svg?height=200&width=200' },
-              { name: 'Organic Milk', price: '$2.49', image: '/placeholder.svg?height=200&width=200' },
-              { name: 'Whole Grain Bread', price: '$1.79', image: '/placeholder.svg?height=200&width=200' },
-              { name: 'Free-Range Eggs', price: '$2.99', image: '/placeholder.svg?height=200&width=200' },
-            ].map(product => (
-              <Card key={product.name}>
-                <CardContent className='p-4'>
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    width={200}
-                    height={200}
-                    className='rounded-md object-cover'
-                  />
-                  <h3 className='font-semibold mt-2'>{product.name}</h3>
-                  <p className='text-sm text-gray-500 dark:text-gray-400'>{product.price}</p>
-                </CardContent>
-              </Card>
+            {products.map(product => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                title={product.title}
+                price={product.price}
+                originalPrice={product.originalPrice}
+                imageUrl={product.productAssets?.[0]?.asset.url}
+                imageName={product.productAssets?.[0]?.asset.name}
+              />
             ))}
           </div>
         </div>

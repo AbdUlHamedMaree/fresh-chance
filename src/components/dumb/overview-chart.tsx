@@ -3,12 +3,16 @@
 import { ResponsiveBar } from '@nivo/bar';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 
-interface ChartData {
+type ChartData = {
   name: string;
   total: number;
-}
+};
 
-export const OverviewChart = ({ data }: { data: ChartData[] }) => {
+export type OverviewChartProps = {
+  data: ChartData[];
+};
+
+export const OverviewChart = ({ data }: OverviewChartProps) => {
   return (
     <Card className='col-span-4'>
       <CardHeader>
