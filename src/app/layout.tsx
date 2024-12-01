@@ -7,9 +7,9 @@ import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@c
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin';
-import { extractRouterConfig } from 'uploadthing/server';
-import { ourFileRouter } from '@/app/api/uploadthing/core';
+// import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin';
+// import { extractRouterConfig } from 'uploadthing/server';
+// import { ourFileRouter } from '@/app/api/uploadthing/core';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -36,15 +36,15 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang='en' suppressHydrationWarning>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
-          <NextSSRPlugin
-            /**
-             * The `extractRouterConfig` will extract **only** the route configs
-             * from the router to prevent additional information from being
-             * leaked to the client. The data passed to the client is the same
-             * as if you were to fetch `/api/uploadthing` directly.
-             */
+          {/*
+           * The `extractRouterConfig` will extract **only** the route configs
+           * from the router to prevent additional information from being
+           * leaked to the client. The data passed to the client is the same
+           * as if you were to fetch `/api/uploadthing` directly.
+           */}
+          {/* <NextSSRPlugin
             routerConfig={extractRouterConfig(ourFileRouter)}
-          />
+          /> */}
           <ThemeProvider defaultTheme='system'>
             <header className='sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
               <div className='container flex h-14 items-center px-4 sm:px-6 lg:px-8'>
