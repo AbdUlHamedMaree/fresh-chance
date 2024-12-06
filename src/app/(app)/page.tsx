@@ -2,10 +2,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AppleIcon, Leaf, Package, ShoppingCart, Smartphone, ThumbsUp } from 'lucide-react';
-import { getAllProductsAction } from './dashboard/products/actions';
-import { ProductCard } from '@/components/dumb/product-card';
-
-export const dynamic = 'force-dynamic';
+import { getAllProductsAction } from '@/app/dashboard/products/actions';
+import { ProductCard } from '@/components/smart/product-card';
 
 export default async function Home() {
   const products = await getAllProductsAction();

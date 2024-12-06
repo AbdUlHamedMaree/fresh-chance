@@ -1,13 +1,14 @@
 'use server';
 
-import { createProduct, deleteProduct, getAllProducts, updateProduct } from '@/queries/product';
+import { createProduct, deleteProduct, getProducts, updateProduct } from '@/queries/product';
 import { insertProductSchema } from '@/schema/products';
 import { revalidateTag } from 'next/cache';
 import { createAsset } from '@/queries/asset';
 import { createProductAsset } from '@/queries/productAsset';
 import { utapi } from '@/lib/uploadthing';
+import { unstable_cache } from 'next/cache';
 
-export const getAllProductsAction = getAllProducts;
+export const getAllProductsAction = unstable_cache(getProducts, ['products']);
 
 export const createProductAction = async (formData: FormData) => {
   // Create the product first
@@ -51,7 +52,7 @@ export const uploadProductAssetsAction = async (productId: string, files: File[]
 
     await createProductAsset({
       productId,
-      assetId: asset.id,
+      assetId: asset!.id,
     });
   }
 

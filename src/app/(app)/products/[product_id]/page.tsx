@@ -4,7 +4,6 @@ import { formatCurrency } from '@/utils/formatCurrency';
 import { formatPercent } from '@/utils/formatPercent';
 import { Package } from 'lucide-react';
 import { notFound } from 'next/navigation';
-import { UploadProductAssetsForm } from '@/components/smart/upload-product-assets-form';
 
 interface ProductPageProps {
   params: Promise<{ product_id: string }>;
@@ -65,9 +64,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <Package className='w-8 h-8 text-gray-400' />
               </div>
             )}
-          </div>
-          <div className='mt-6'>
-            <UploadProductAssetsForm productId={product_id} />
           </div>
         </CardContent>
       </Card>

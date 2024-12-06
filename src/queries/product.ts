@@ -4,12 +4,12 @@ import { withAnonymousDrizzle } from '@/db/anonymous';
 import { withAuthenticatedDrizzle } from '@/db/authenticated';
 import { type InsertProduct, type SelectProduct, productsTable } from '@/schema/products';
 import { eq } from 'drizzle-orm';
-import { head } from 'lodash/fp';
+import { head } from '@/utils/head';
 
 export const createProduct = async (data: InsertProduct) =>
   withAuthenticatedDrizzle(async db => db.insert(productsTable).values(data).returning().then(head));
 
-export const getAllProducts = async () =>
+export const getProducts = async () =>
   withAnonymousDrizzle(async db =>
     db.query.productsTable.findMany({
       with: {

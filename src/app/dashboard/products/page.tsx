@@ -5,10 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { removeProductAction } from './actions';
 import Link from 'next/link';
-import { getAllProducts } from '@/queries/product';
+import { getProducts } from '@/queries/product';
 
 export default async function Home({ searchParams }: { searchParams: Promise<{ edit?: string }> }) {
-  const products = await getAllProducts();
+  const products = await getProducts();
   const productIdToEdit = (await searchParams).edit;
   const productToEdit = products.find(product => product.id === productIdToEdit);
 

@@ -2,8 +2,9 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { formatCurrency } from '@/utils/formatCurrency';
 import { formatPercent } from '@/utils/formatPercent';
-import { Package } from 'lucide-react';
+import { Package, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 interface ProductCardProps {
   id: string;
@@ -12,19 +13,33 @@ interface ProductCardProps {
   originalPrice: number;
   imageUrl?: string;
   imageName?: string;
+  onAddToCart?: (id: string) => void;
 }
 
-export const ProductCard = ({ id, title, price, originalPrice, imageUrl, imageName }: ProductCardProps) => {
+export const ProductCard = ({
+  id,
+  title,
+  price,
+  originalPrice,
+  imageUrl,
+  imageName,
+  onAddToCart,
+}: ProductCardProps) => {
   const discount = (originalPrice - price) / originalPrice;
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onAddToCart?.(id);
+  };
 
   return (
     <Link href={`/products/${id}`}>
-      <Card className='cursor-pointer'>
+      <Card className='cursor-pointer group'>
         <CardContent className='p-4'>
           {imageUrl ? (
-            <img src={imageUrl} alt={imageName || title} width={200} height={200} className='rounded-md object-cover' />
+            <img src={imageUrl} alt={imageName || title} className='rounded-md object-cover aspect-square' />
           ) : (
-            <div className='w-[200px] h-[200px] bg-gray-100 rounded-md flex items-center justify-center'>
+            <div className='aspect-square bg-gray-100 rounded-md flex items-center justify-center'>
               <Package className='w-8 h-8 text-gray-400' />
             </div>
           )}
@@ -38,6 +53,15 @@ export const ProductCard = ({ id, title, price, originalPrice, imageUrl, imageNa
               {formatPercent.format(discount)} off
             </span>
           </div>
+          {onAddToCart && (
+            <Button
+              className='w-full mt-4 opacity-0 group-hover:opacity-100 transition-opacity'
+              onClick={handleAddToCart}
+            >
+              <ShoppingCart className='w-4 h-4 mr-2' />
+              Add to Cart
+            </Button>
+          )}
         </CardContent>
       </Card>
     </Link>
